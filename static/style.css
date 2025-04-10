@@ -1,0 +1,149 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #fceabb, #f8b500);
+    margin: 0;
+    padding: 20px;
+    color: #333;
+    min-height: 100vh;
+    transition: background 0.5s ease, color 0.5s ease;
+}
+
+/* Dark mode */
+body.dark {
+    background: linear-gradient(135deg, #1e1e2f, #3c3c5a);
+    color: #f5f5f5;
+}
+
+.block {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    animation: fadeInUp 0.6s ease both;
+    transition: background 0.5s ease;
+    border: 2px solid #fff5b1;
+    animation: glow 2s infinite alternate;
+}
+
+body.dark .block {
+    background: #2c2c3e;
+    color: #fff;
+    box-shadow: 0 2px 5px rgba(255,255,255,0.05);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+button, input[type="text"] {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+button {
+    background: #4b0082;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #6a0dad;
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 10px;
+    font-size: 0.9em;
+    color: #444;
+}
+
+body.dark footer {
+    color: #aaa;
+}
+
+/* Dark mode toggle button */
+#toggle-dark {
+    float: right;
+    cursor: pointer;
+    font-size: 1.2em;
+    background: none;
+    border: none;
+    color: inherit;
+    margin-bottom: 10px;
+}
+
+/* Glowing border animation */
+@keyframes glow {
+    from {
+        box-shadow: 0 0 10px #ffe066, 0 0 20px #ffcc00;
+    }
+    to {
+        box-shadow: 0 0 20px #ffd633, 0 0 30px #ffb347;
+    }
+}
+
+/* Fireflies container */
+#fireflies {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.firefly {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #ffffcc;
+    border-radius: 50%;
+    box-shadow: 0 0 12px 6px #ffffcc, 0 0 20px 10px #ffe;
+    animation: twinkle 6s infinite, float 15s infinite ease-in-out;
+    opacity: 0.8;
+}
+
+/* Hide fireflies in light mode */
+body:not(.dark) #fireflies {
+    display: none;
+}
+
+body.dark #fireflies {
+    display: block;
+}
+
+body:not(.dark) .firefly {
+    display: none;
+}
+
+/* Firefly animations */
+@keyframes twinkle {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 1; }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+    100% {
+        transform: translateY(-100vh) translateX(calc(100vw * var(--randomX)));
+    }
+}
+
+/* Keep main content above fireflies */
+body, .block, form, h1, a {
+    position: relative;
+    z-index: 2;
+}
